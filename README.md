@@ -63,6 +63,7 @@ app.get(
     res.redirect('/');
   }
 );
+```
 
 ## Credits
 
