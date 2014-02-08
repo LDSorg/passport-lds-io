@@ -52,8 +52,6 @@ function Strategy(options, verify) {
   var me = this
     ;
 
-  me.name = 'ldsauth';
-
   options = options || {};
   options.authorizationURL = 
     options.authorizationURL || 
@@ -66,7 +64,10 @@ function Strategy(options, verify) {
     (pConf.protocol + '://' + pConf.host + '/oauth/token')
     ;
   
-  OAuth2Strategy.call(this, options, verify);
+  OAuth2Strategy.call(me, options, verify);
+
+  // must be called after prototype is modified
+  me.name = 'ldsauth';
 }
 
 /**
@@ -124,4 +125,4 @@ Strategy.prototype.userProfile = function (accessToken, done) {
 /**
  * Expose `Strategy`.
  */
-module.exports.Strategy = Strategy;
+module.exports.Strategy = Strategy.Strategy = Strategy;
