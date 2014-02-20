@@ -25,5 +25,8 @@
   "bugs": {
     "url": "https://github.com/LDSorg/passport-ldsauth/issues"
   },
-  "homepage": "https://github.com/LDSorg/passport-ldsauth"
+  "homepage": "https://github.com/LDSorg/passport-ldsauth",
+  "dependencies": {
+    "passport-oauth": "~1.0.0"
+  }
 }
