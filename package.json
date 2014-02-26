@@ -1,6 +1,6 @@
 {
   "name": "passport-ldsauth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "LDSAuth.org / LDS.org authentication strategy for Passport and Node.js",
   "main": "strategy.js",
   "scripts": {
