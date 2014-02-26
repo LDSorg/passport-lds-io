@@ -7,6 +7,7 @@ module.exports.parse = function (json) {
   profile.id = json.currentUserId;
   profile.displayName = json.currentHousehold.headOfHousehold.name.split(/, /).reverse().join(' ');
 
+  profile.guest = json.guest;
 
   profile.emails = [];
   if (json.currentHousehold.headOfHousehold.email) {
