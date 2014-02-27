@@ -25,17 +25,19 @@ account and OAuth 2.0 tokens.  The strategy requires a `verify` callback, which
 accepts these credentials and calls `done` providing a user, as well as
 `options` specifying a app ID, app secret, and callback URL.
 
-    passport.use(new LdsAuthStrategy({
-        clientID: LDSAUTH_APP_ID,
-        clientSecret: LDSAUTH_APP_SECRET,
-        callbackURL: "http://localhost:3000/oauth2/ldsauth/callback"
-      },
-      function(accessToken, refreshToken, profile, done) {
-        User.findOrCreate({ ldsOrgId: profile.currentUserId }, function (err, user) {
-          return done(err, user);
-        });
-      }
-    ));
+```javascript
+passport.use(new LdsAuthStrategy({
+    clientID: LDSAUTH_APP_ID,
+    clientSecret: LDSAUTH_APP_SECRET,
+    callbackURL: "http://localhost:3000/oauth2/ldsauth/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate({ ldsOrgId: profile.currentUserId }, function (err, user) {
+      return done(err, user);
+    });
+  }
+));
+```
 
 #### Authenticate Requests
 
