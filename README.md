@@ -1,8 +1,8 @@
-# passport-ldsauth
+# passport-lds-connect
 ================
 
 [Passport](http://passportjs.org/) strategy for authenticating with
-[LDSAuth.org](http://ldsauth.org/) / [LDS.org](http://lds.org/) using the OAuth 2.0 API.
+[ldsconnect.org](http://ldsconnect.org/) / [LDS.org](http://lds.org/) using the OAuth 2.0 API.
 
 This module lets you authenticate using LDS.org in your Node.js applications.
 By plugging into Passport, LDS.org authentication can be easily and
@@ -13,7 +13,7 @@ unobtrusively integrated into any application or framework that supports
 ## Install
 
 ```bash
-npm install passport-ldsauth --save
+npm install passport-lds-connect --save
 ```
 
 ## Usage
@@ -28,7 +28,7 @@ accepts these credentials and calls `done` providing a user, as well as
     passport.use(new LdsAuthStrategy({
         clientID: LDSAUTH_APP_ID,
         clientSecret: LDSAUTH_APP_SECRET,
-        callbackURL: "http://localhost:3000/oauth2/ldsauth/callback"
+        callbackURL: "http://localhost:3000/oauth2/ldsconnect/callback"
       },
       function(accessToken, refreshToken, profile, done) {
         User.findOrCreate({ ldsOrgId: profile.currentUserId }, function (err, user) {
@@ -39,7 +39,7 @@ accepts these credentials and calls `done` providing a user, as well as
 
 #### Authenticate Requests
 
-Use `passport.authenticate()`, specifying the `'ldsauth'` strategy, to
+Use `passport.authenticate()`, specifying the `'ldsconnect'` strategy, to
 authenticate requests.
 
 For example, as route middleware in an [Express](http://expressjs.com/)
@@ -47,17 +47,17 @@ application:
 
 ```javascript
 app.get(
-  '/oauth2/ldsauth'
-, passport.authenticate('ldsauth')
+  '/oauth2/ldsconnect'
+, passport.authenticate('ldsconnect')
 );
 
 // On success this falls through to the second route
 app.get(
-  '/oauth2/ldsauth/callback'
-, passport.authenticate('ldsauth', { failureRedirect: '/login' })
+  '/oauth2/ldsconnect/callback'
+, passport.authenticate('ldsconnect', { failureRedirect: '/login' })
 );
 app.get(
-  '/oauth2/ldsauth/callback'
+  '/oauth2/ldsconnect/callback'
 , function (req, res) {
     // Successful authentication, redirect home.
     res.redirect('/');
