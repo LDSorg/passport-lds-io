@@ -32,6 +32,13 @@ passport.use(new LdsAuthStrategy({
     callbackURL: "http://localhost:3000/oauth2/ldsauth/callback"
   },
   function(accessToken, refreshToken, profile, done) {
+    if (profile.guest) {
+      // this is the built-in dummy user 'dumbledore', not an actual user
+      // be aware that anyone can log into ldsauth.org with this test user.
+      // The intent is that they can experiment with your app if they don't yet
+      // have an lds.org account and see if it it's worth the hassle of
+      // finding their MRN to sign up
+    }
     User.findOrCreate({ ldsOrgId: profile.currentUserId }, function (err, user) {
       return done(err, user);
     });
