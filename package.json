@@ -1,17 +1,19 @@
 {
-  "name": "passport-ldsauth",
-  "version": "1.0.1",
-  "description": "LDSAuth.org / LDS.org authentication strategy for Passport and Node.js",
+  "name": "passport-lds-connect",
+  "version": "1.0.2",
+  "description": "Node.js / ExpressJS / PassportJS OAuth2 authentication strategy for connecting with LDS.org",
   "main": "strategy.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/LDSorg/passport-ldsauth.git"
+    "url": "git://github.com/LDSorg/passport-lds-connect.git"
   },
   "keywords": [
     "LDSAuth",
+    "LDSConnect",
+    "LDS-Connect",
     "LDSOrg",
     "LDS.org",
     "LDS",
@@ -23,9 +25,9 @@
   "author": "AJ ONeal <coolaj86@gmail.com> (http://coolaj86.com/)",
   "license": "Apache2",
   "bugs": {
-    "url": "https://github.com/LDSorg/passport-ldsauth/issues"
+    "url": "https://github.com/LDSorg/passport-lds-connect/issues"
   },
-  "homepage": "https://github.com/LDSorg/passport-ldsauth",
+  "homepage": "https://github.com/LDSorg/passport-lds-connect",
   "dependencies": {
     "passport-oauth": "~1.0.0"
   }

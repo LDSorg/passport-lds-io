@@ -9,7 +9,7 @@ var util = require('util')
   , parse = require('./profile').parse
   , pConf = {
       protocol: 'http'
-    , host: 'ldsauth.org'
+    , host: 'ldsconnect.org'
     , profileUrl: '/api/ldsorg/me'
     }
   ;
@@ -67,7 +67,7 @@ function Strategy(options, verify) {
   OAuth2Strategy.call(me, options, verify);
 
   // must be called after prototype is modified
-  me.name = 'ldsauth';
+  me.name = 'ldsconnect';
 }
 
 /**

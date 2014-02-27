@@ -20,22 +20,31 @@ npm install passport-lds-connect --save
 
 #### Configure Strategy
 
-The LDSAuth authentication strategy authenticates users using an LDS.org
+The `ldsconnect` authentication strategy authenticates users using an LDS.org
 account and OAuth 2.0 tokens.  The strategy requires a `verify` callback, which
 accepts these credentials and calls `done` providing a user, as well as
 `options` specifying a app ID, app secret, and callback URL.
 
-    passport.use(new LdsAuthStrategy({
-        clientID: LDSAUTH_APP_ID,
-        clientSecret: LDSAUTH_APP_SECRET,
-        callbackURL: "http://localhost:3000/oauth2/ldsconnect/callback"
-      },
-      function(accessToken, refreshToken, profile, done) {
-        User.findOrCreate({ ldsOrgId: profile.currentUserId }, function (err, user) {
-          return done(err, user);
-        });
-      }
-    ));
+```javascript
+passport.use(new LdsConnectStrategy({
+    clientID: LDS_APP_ID,
+    clientSecret: LDS_APP_SECRET,
+    callbackURL: "http://localhost:3000/oauth2/ldsconnect/callback"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    if (profile.guest) {
+      // this is the built-in dummy user 'dumbledore', not an actual user
+      // be aware that anyone can log into ldsconnect.org with this test user.
+      // The intent is that they can experiment with your app if they don't yet
+      // have an lds.org account and see if it it's worth the hassle of
+      // finding their MRN to sign up
+    }
+    User.findOrCreate({ ldsOrgId: profile.currentUserId }, function (err, user) {
+      return done(err, user);
+    });
+  }
+));
+```
 
 #### Authenticate Requests
 
