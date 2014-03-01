@@ -8,7 +8,7 @@ var util = require('util')
   , InternalOAuthError = require('passport-oauth').InternalOAuthError
   , parse = require('./profile').parse
   , pConf = {
-      protocol: 'http'
+      protocol: 'https'
     , host: 'ldsconnect.org'
     , profileUrl: '/api/ldsorg/me'
     }
