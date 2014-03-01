@@ -103,10 +103,15 @@ Strategy.prototype.userProfile = function (accessToken, done) {
         ;
 
       if (err) { return done(new InternalOAuthError('failed to fetch user profile', err)); }
-      
+
       if ('string' === typeof body) {
         try { json = JSON.parse(body); }
-        catch(e) { done(e); return; }
+        catch(e) {
+          console.error(e);
+          console.error(body);
+          done(e);
+          return;
+        }
       } else if ('object' === typeof body) {
         json = body;
       }
@@ -120,7 +125,6 @@ Strategy.prototype.userProfile = function (accessToken, done) {
     }
   );
 };
-
 
 /**
  * Expose `Strategy`.
