@@ -4,6 +4,9 @@
  * Module dependencies.
  */
 var util = require('util')
+  , https = require('https')
+  , fs = require('fs')
+  , path = require('path')
   , OAuth2Strategy = require('passport-oauth').OAuth2Strategy
   , InternalOAuthError = require('passport-oauth').InternalOAuthError
   , parse = require('./profile').parse
@@ -12,7 +15,14 @@ var util = require('util')
     , host: 'ldsconnect.org'
     , profileUrl: '/api/ldsorg/me'
     }
+  , cas
   ;
+
+cas = https.globalAgent.options.ca = https.globalAgent.options.ca || [];
+cas.push(fs.readFileSync(path.join(__dirname, 'ssl', '00-equifax.pem')));
+cas.push(fs.readFileSync(path.join(__dirname, 'ssl', '01-rapidssl.pem')));
+cas.push(fs.readFileSync(path.join(__dirname, 'ssl', '02-rapidssl.pem')));
+cas.push(fs.readFileSync(path.join(__dirname, 'ssl', '03-ldsconnect.pem')));
 
 /**
  * `Strategy` constructor.
