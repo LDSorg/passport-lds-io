@@ -18,7 +18,8 @@ var util = require('util')
   , cas
   ;
 
-cas = https.globalAgent.options.ca = https.globalAgent.options.ca || [];
+require('ssl-root-cas').inject();
+cas = https.globalAgent.options.ca;
 cas.push(fs.readFileSync(path.join(__dirname, 'ssl', '00-equifax.pem')));
 cas.push(fs.readFileSync(path.join(__dirname, 'ssl', '01-rapidssl.pem')));
 cas.push(fs.readFileSync(path.join(__dirname, 'ssl', '02-rapidssl.pem')));
