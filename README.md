@@ -27,9 +27,14 @@ accepts these credentials and calls `done` providing a user, as well as
 
 ```javascript
 passport.use(new LdsConnectStrategy({
-    clientID: LDS_APP_ID,
-    clientSecret: LDS_APP_SECRET,
-    profileUrl: '/api/ldsconnect/me', // defaults to '/api/ldsorg/me', which is not as easy to use
+    // These are the working demo app id and app secret
+    clientID: '55c7-test-bd03',
+    clientSecret: '6b2fc4f5-test-8126-64e0-b9aa0ce9a50d',
+
+    // defaults to '/api/ldsorg/me', which is not as easy to use
+    profileUrl: '/api/ldsconnect/me',
+
+    // local.ldsconnect.org points to 127.0.0.1 and is an authorized domain for demo apps
     callbackURL: "http://local.ldsconnect.org:3000/oauth2/ldsconnect/callback"
   },
   function(accessToken, refreshToken, profile, done) {
