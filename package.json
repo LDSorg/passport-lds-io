@@ -1,6 +1,6 @@
 {
   "name": "passport-lds-connect",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Node.js / ExpressJS / PassportJS OAuth2 authentication strategy for connecting with LDS.org",
   "main": "strategy.js",
   "scripts": {

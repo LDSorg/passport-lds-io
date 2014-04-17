@@ -13,6 +13,7 @@ var util = require('util')
   , pConf = {
       protocol: 'https'
     , host: 'ldsconnect.org'
+      // TODO v2.0.0 '/api/ldsconnect/me'
     , profileUrl: '/api/ldsorg/me'
     }
   , cas
@@ -74,11 +75,21 @@ function Strategy(options, verify) {
     options.tokenUrl ||
     (pConf.protocol + '://' + pConf.host + '/oauth/token')
     ;
+  me._profileUrl = 
+    options.profileURL ||
+    options.profileUrl || 
+    pConf.profileUrl
+    ;
   
   OAuth2Strategy.call(me, options, verify);
 
   // must be called after prototype is modified
   me.name = 'ldsconnect';
+
+  if ('/api/ldsorg/me' === me._profileUrl) {
+    console.warn("[WARN] [passport-lds-connect/strategy.js] You are using the default profile url '/api/ldsorg/me', which is deprecated. Update to '/api/ldsconnect/me'.");
+    console.warn("Ex: new LdsConnectStrategy({ clientID: '55c7-test-bd03', clientSecret: '6b2fc4f5-test-8126-64e0-b9aa0ce9a50d', profileUrl: '/api/ldsconnect/me' }, fn)");
+  } 
 }
 
 /**
@@ -106,7 +117,7 @@ Strategy.prototype.userProfile = function (accessToken, done) {
     ;
 
   me._oauth2.get(
-    pConf.protocol + '://' + pConf.host + pConf.profileUrl
+    pConf.protocol + '://' + pConf.host + me._profileUrl
   , accessToken
   , function (err, body/*, res*/) {
       var json
@@ -127,10 +138,13 @@ Strategy.prototype.userProfile = function (accessToken, done) {
         json = body;
       }
 
-      profile = parse(json);
+      profile = json;
+      if ('/api/ldsorg/me' === me._profileUrl) {
+        profile = parse(json);
+        profile._raw = body;
+        profile._json = json;
+      }
       profile.provider = me.name;
-      profile._raw = body;
-      profile._json = json;
 
       done(null, profile);
     }

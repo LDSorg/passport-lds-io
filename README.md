@@ -29,7 +29,8 @@ accepts these credentials and calls `done` providing a user, as well as
 passport.use(new LdsConnectStrategy({
     clientID: LDS_APP_ID,
     clientSecret: LDS_APP_SECRET,
-    callbackURL: "http://localhost:3000/oauth2/ldsconnect/callback"
+    profileUrl: '/api/ldsconnect/me', // defaults to '/api/ldsorg/me', which is not as easy to use
+    callbackURL: "http://local.ldsconnect.org:3000/oauth2/ldsconnect/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     if (profile.guest) {

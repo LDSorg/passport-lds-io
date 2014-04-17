@@ -49,5 +49,32 @@ module.exports.parse = function (json) {
     profile.photos.pop();
   }
 
+  profile.area = {
+    id: json.currentUnits.areaUnitNo
+  };
+  profile.stake = {
+    id: json.currentUnits.stakeUnitNo
+  , name: json.currentUnits.stakeName
+  , type: json.currentUnits.stake && 'stake'
+      || json.currentUnits.mission && 'mission'
+      || json.currentUnits.district && 'district'
+  , admin: json.currentUnits.userHasStakeAdminRights
+  };
+  profile.ward = {
+    id: json.currentUnits.wardUnitNo
+  , name: json.currentUnits.wardName
+  , type: json.currentUnits.ward && 'ward'
+      || json.currentUnits.branch && 'branch'
+  , home: json.currentUnits.usersHomeWard
+  , admin: json.currentUnits.userHasWardAdminRights
+  , photoAdmin: json.currentUnits.userHasWardPhotoAdminRights
+  };
+  // TODO iterate over these same as above
+  //profile.stakes = json.currentStakes;
+  profile.rights = {
+  };
+  // TODO
+  profile.callings = [];
+
   return profile;
 };
