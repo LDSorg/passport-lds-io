@@ -11,7 +11,7 @@ unobtrusively integrated into any application or framework that supports
 
 Questions? Comments?
 Leave [an issue](https://github.com/LDSorg/ldsorgjs/issues/new)
-or join the discussion on [https://groups.google.com/forum/#!forum/lds-connect](Google Groups)
+or join the discussion on [Google Groups](https://groups.google.com/forum/#!forum/lds-connect)
 
 ## Install
 
