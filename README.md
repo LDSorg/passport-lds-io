@@ -1,5 +1,4 @@
 # passport-lds-connect
-================
 
 [Passport](http://passportjs.org/) strategy for authenticating with
 [ldsconnect.org](http://ldsconnect.org/) / [LDS.org](http://lds.org/) using the OAuth 2.0 API.
@@ -10,10 +9,15 @@ unobtrusively integrated into any application or framework that supports
 [Connect](http://www.senchalabs.org/connect/)-style middleware, including
 [Express](http://expressjs.com/).
 
+Questions? Comments?
+Leave [an issue](https://github.com/LDSorg/ldsorgjs/issues/new)
+or join the discussion on [https://groups.google.com/forum/#!forum/lds-connect](Google Groups)
+
 ## Install
 
 ```bash
 npm install passport-lds-connect --save
+npm install lds-connect-proxy --save
 ```
 
 ## Usage
@@ -51,6 +55,10 @@ passport.use(new LdsConnectStrategy({
   }
 ));
 ```
+
+If you're making any requests in the browser you'll also want to use 
+[lds-connect-proxy](https://github.com/LDSorg/lds-connect-proxy-node)
+until ldsconnect.org supports CORS.
 
 #### Authenticate Requests
 
