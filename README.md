@@ -10,7 +10,7 @@ unobtrusively integrated into any application or framework that supports
 [Express](http://expressjs.com/).
 
 Questions? Comments?
-Leave [an issue](https://github.com/LDSorg/ldsorgjs/issues/new)
+Leave [an issue](https://github.com/LDSorg/passport-lds-connect/issues/new)
 or join the discussion on [Google Groups](https://groups.google.com/forum/#!forum/lds-connect)
 
 ## Install
