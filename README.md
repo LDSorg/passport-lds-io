@@ -22,6 +22,8 @@ npm install lds-connect-proxy --save
 
 ## Usage
 
+See [Passport LDS Connect Example](https://github.com/LDSorg/passport-lds-connect-example)
+
 #### Configure Strategy
 
 The `ldsconnect` authentication strategy authenticates users using an LDS.org
