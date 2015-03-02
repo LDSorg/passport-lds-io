@@ -30,6 +30,6 @@
   "homepage": "https://github.com/LDSorg/passport-lds-connect",
   "dependencies": {
     "passport-oauth": "~1.0.0",
-    "ssl-root-cas": "~1.0.5"
+    "ssl-root-cas": "^1.1.7"
   }
 }

@@ -4,8 +4,6 @@
  * Module dependencies.
  */
 var util = require('util')
-  , https = require('https')
-  , fs = require('fs')
   , path = require('path')
   , OAuth2Strategy = require('passport-oauth').OAuth2Strategy
   , InternalOAuthError = require('passport-oauth').InternalOAuthError
@@ -16,15 +14,14 @@ var util = require('util')
       // TODO v2.0.0 '/api/ldsconnect/me'
     , profileUrl: '/api/ldsorg/me'
     }
-  , cas
   ;
 
-require('ssl-root-cas').inject();
-cas = https.globalAgent.options.ca;
-cas.push(fs.readFileSync(path.join(__dirname, 'ssl', '00-equifax.pem')));
-cas.push(fs.readFileSync(path.join(__dirname, 'ssl', '01-rapidssl.pem')));
-cas.push(fs.readFileSync(path.join(__dirname, 'ssl', '02-rapidssl.pem')));
-cas.push(fs.readFileSync(path.join(__dirname, 'ssl', '03-ldsconnect.pem')));
+require('ssl-root-cas/latest')
+  .inject()
+  .addFile(path.join(__dirname, 'certs', 'ca', 'root.crt.pem'))
+  .addFile(path.join(__dirname, 'certs', 'ca', 'intermediate.crt.pem'))
+  //.addFile(path.join(__dirname, 'certs', 'server', 'ldsconnect.crt.pem'))
+  ;
 
 /**
  * `Strategy` constructor.
