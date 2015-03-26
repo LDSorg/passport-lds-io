@@ -1,6 +1,6 @@
 {
-  "name": "passport-lds-connect",
-  "version": "1.2.0",
+  "name": "passport-lds-io",
+  "version": "2.0.0",
   "description": "Node.js / ExpressJS / PassportJS OAuth2 authentication strategy for connecting with LDS.org",
   "main": "strategy.js",
   "scripts": {
@@ -22,7 +22,11 @@
     "auth",
     "passport"
   ],
-  "author": "AJ ONeal <coolaj86@gmail.com> (http://coolaj86.com/)",
+  "author": {
+    "name": "AJ ONeal",
+    "email": "coolaj86@gmail.com",
+    "url": "https://coolaj86.com/"
+  },
   "license": "Apache2",
   "bugs": {
     "url": "https://github.com/LDSorg/passport-lds-connect/issues"
