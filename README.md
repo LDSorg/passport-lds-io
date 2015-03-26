@@ -1,4 +1,4 @@
-# passport-lds-connect
+# passport-lds-io
 
 [Passport](http://passportjs.org/) strategy for authenticating with
 [ldsconnect.org](http://ldsconnect.org/) / [LDS.org](http://lds.org/) using the OAuth 2.0 API.
