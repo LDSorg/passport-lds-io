@@ -134,6 +134,8 @@ Strategy.prototype.userProfile = function (accessToken, done) {
   }
 
   function fetchRealProfile(accounts, done) {
+    accounts = accounts.accounts || accounts.result || accounts.results || accounts;
+
     if (accounts.length > 1) {
       done(new Error("handling multiple user accounts is not yet implemented"));
       return;
