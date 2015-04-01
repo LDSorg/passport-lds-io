@@ -37,7 +37,7 @@ passport.use(new LdsConnectStrategy({
     clientSecret: 'TEST_SK_jtgoHAMKdIgoWSYd8E1gBIrW',
 
     // local.ldsconnect.org points to 127.0.0.1 and is an authorized domain for demo apps
-    callbackURL: "https://local.ldsconnect.org:8043/api/oauth3/providers/lds.io/callback"
+    callbackURL: "https://local.ldsconnect.org:8043/api/oauth3/callbacks/ldsconnect.org"
   },
   function(accessToken, refreshToken, profile, done) {
     if (profile.guest) {
@@ -64,13 +64,13 @@ application:
 
 ```javascript
 app.get(
-  '/api/oauth3/providers/lds.io'
+  '/api/oauth3/authorization_redirect/ldsconnect.org'
 , passport.authenticate('lds.io')
 );
 
 // On success this falls through to the second function
 app.get(
-  '/api/oauth3/providers/lds.io/callback'
+  '/api/oauth3/callbacks/ldsconnect.org'
 , passport.authenticate('lds.io', { failureRedirect: '/login' })
 , function (req, res) {
     // Successful authentication, redirect home.
