@@ -7,13 +7,6 @@ var util = require('util')
   , path = require('path')
   , OAuth2Strategy = require('passport-oauth').OAuth2Strategy
   , InternalOAuthError = require('passport-oauth').InternalOAuthError
-  , pConf = {
-      protocol: 'https'
-    , host: 'lds.io'
-      // TODO v2.0.0 '/api/ldsconnect/me'
-    , profileUrl: '/api/ldsio/accounts'
-    , realProfileUrl: '/api/ldsio/{{\s*account_id\s*}}/me'
-    }
   ;
 
 require('ssl-root-cas/latest')
@@ -58,35 +51,36 @@ require('ssl-root-cas/latest')
  * @api public
  */
 function Strategy(options, verify) {
-  var me = this
-    ;
+  var request = require('request');
 
-  options = options || {};
-  options.authorizationURL = 
-    options.authorizationURL || 
-    options.authorizationUrl ||
-    (pConf.protocol + '://' + pConf.host + '/api/oauth3/authorization_dialog')
-    ;
-  options.tokenURL =
-    options.tokenURL ||
-    options.tokenUrl ||
-    (pConf.protocol + '://' + pConf.host + '/api/oauth3/access_token')
-    ;
-  me._profileUrl = 
-    options.profileURL ||
-    options.profileUrl || 
-    pConf.profileUrl
-    ;
-  me._realProfileUrl = 
-    options.realProfileURL ||
-    options.realProfileUrl || 
-    pConf.realProfileUrl
-    ;
-  
-  OAuth2Strategy.call(me, options, verify);
+  var me = this;
 
-  // must be called after prototype is modified
-  me.name = 'lds.io';
+  me.then = request.get('https://ldsconnect.org/oauth3.json', function (err, resp, body) {
+    var oauth3;
+
+    if (err) {
+      console.error("Couldn't fetch https://ldsconnect.org/oauth3.json");
+      throw err;
+    }
+    try {
+      oauth3 = JSON.parse(body);
+    } catch(e) {
+      console.error("Couldn't fetch https://ldsconnect.org/oauth3.json");
+      throw e;
+    }
+
+    options = options || {};
+    options.authorizationURL = oauth3.authorization_dialog.url;
+    options.tokenURL = oauth3.access_token.url;
+    options.profileURL = oauth3.profile.url;
+    me._profileUrl = oauth3.accounts.url;
+    me._realProfileUrl = oauth3.profile.url;
+    
+    OAuth2Strategy.call(me, options, verify);
+
+    // must be called after prototype is modified
+    me.name = 'lds.io';
+  });
 }
 
 /**
@@ -148,7 +142,7 @@ Strategy.prototype.userProfile = function (accessToken, done) {
 
     var id = accounts[0].app_scoped_id || accounts[0].id;
     me._oauth2.get(
-      pConf.protocol + '://' + pConf.host + me._realProfileUrl
+      me._realProfileUrl
         .replace(/{{account_id}}/, id)
     , accessToken
     , function (err, body/*, res*/) {
@@ -163,7 +157,7 @@ Strategy.prototype.userProfile = function (accessToken, done) {
   }
 
   me._oauth2.get(
-    pConf.protocol + '://' + pConf.host + me._profileUrl
+    me._profileUrl
   , accessToken
   , function (err, body/*, res*/) {
       if (err) { return done(new InternalOAuthError('failed to fetch user account list', err)); }
