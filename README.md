@@ -1,3 +1,10 @@
+Depracated
+==========
+
+LDS I/O uses [OAuth3](https://github.com/OAuth3), so it doesn't require an LDS I/O specific module.
+
+See [LDS I/O node expressjs passport example](https://github.com/LDSorg/backend-oauth2-node-passport-example) and [passport-oauth3](https://github.com/OAuth3/node-passport-oauth3).
+
 # passport-lds-io
 
 [Passport](http://passportjs.org/) strategy for authenticating with
